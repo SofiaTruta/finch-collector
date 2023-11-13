@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="content mt-6">
+<h1>All Finches in our Collection:</h1>
+</div>
+
+<div class='content'>
+    {% for finch in finches%}
+    <a href="/finches/{{ finch.id }}">
+    <div class="card container my-3">
+      <div class="card-content">
+          <div class="media-content">
+            <p class="title is-4">{{finch.name}}</p>
+            <p class="subtitle is-6">{{finch.species}}</p>
+          </div>
+        </div>
+    
+        <div class="content p-3">
+          Description (male): {{finch.description}}
+          Where to find it: {{finch.where_to_find}}
+        </div>
+      </div>
+    </div>
+  </a>
+    {% endfor %}
+</div>
+</div>
+{% endblock  %}

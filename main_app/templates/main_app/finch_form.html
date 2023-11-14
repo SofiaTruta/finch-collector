@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block main %}
+
+<div class="content m-6">
+
+    {% if  object %}
+        <h1 class='m-6'>Edit <span>{{object.name}}</span></h1>
+    {% else %}
+        <h1>Add a Finch</h1>
+    {% endif %}
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table class='table '>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Save it!" class='button is-success mx-6'>
+    </form>
+</div>
+{% endblock %}

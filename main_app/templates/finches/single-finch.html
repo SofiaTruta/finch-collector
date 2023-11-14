@@ -19,6 +19,11 @@
         </div>
       </div>
         </div>
+
+        <div class='content m-6'>
+          <a href="{% url 'finch_update' finch.id %}" class='button is-warning mx-2'>Edit</a>
+          <a href="{% url 'finch_delete' finch.id %}" class='button is-danger mx-2'>Delete</a>
+        </div>
 </div>
 
 {% endblock %}

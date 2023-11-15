@@ -2,28 +2,35 @@
 
 {% block main %}
 <div class="content m-6">
-<h1>All Finches in our Collection:</h1>
+  <h1>All Finches in our Collection:</h1>
 </div>
 
 <div class='content'>
-    {% for finch in finches%}
-    <a href="/finches/{{ finch.id }}">
+  {% for finch in finches%}
+  <a href="/finches/{{ finch.id }}">
     <div class="card container my-3">
       <div class="card-content">
-          <div class="media-content">
-            <p class="title is-4">{{finch.name}}</p>
-            <p class="subtitle is-6">{{finch.species}}</p>
-          </div>
-        </div>
-    
-        <div class="content p-3">
-          Description (male): {{finch.description}}
-          Where to find it: {{finch.where_to_find}}
+        <div class="media-content">
+          <p class="title is-4">{{finch.name}}</p>
+          <p class="subtitle is-6">{{finch.species}}</p>
         </div>
       </div>
+
+      <div class="content p-3">
+        Description (male): {{finch.description}}
+        Where to find it: {{finch.where_to_find}}
+      </div>
     </div>
-  </a>
-    {% endfor %}
+</div>
+</a>
+{% endfor %}
+</div>
+
+<div class='m-6'>
+  <form action="{% url 'finch_create' %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" class="button is-primary">Add a new finch</button>
+  </form>
 </div>
 </div>
-{% endblock  %}
+{% endblock %}

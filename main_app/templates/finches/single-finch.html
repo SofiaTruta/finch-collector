@@ -5,7 +5,7 @@
   <div class="columns">
 
     <div class="column">
-      <div class="card p-3">
+      <div class="card p-3 mb-6">
         <div class="content p-3">
           <p class="title is-4">
             {{finch.name}}
@@ -19,13 +19,49 @@
           <p>Description (male): {{finch.description}}</p>
           <p>Where to find it: {{finch.where_to_find}}</p>
         </div>
+
+        <div class='content m-4'>
+          <a href="{% url 'finch_update' finch.id %}" class='button is-warning mx-2'>Edit</a>
+          <a href="{% url 'finch_delete' finch.id %}" class='button is-danger mx-2'>Delete</a>
+        </div>
       </div>
 
-      <div class='content m-6'>
-        <a href="{% url 'finch_update' finch.id %}" class='button is-warning mx-2'>Edit</a>
-        <a href="{% url 'finch_delete' finch.id %}" class='button is-danger mx-2'>Delete</a>
+     
+
+          <!-- add a snack card -->
+      <div class="card p-5">
+        <h3>Snacks {{ finch.name }} has already tried:</h3>
+        {% if  finch.snacks.count %}
+          {% for snack in finch.snacks.all %}
+            <p>{{ snack.name }}</p>
+            <form action="{% url 'remove_snack' finch.id snack.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit">Remove</button>
+            </form>
+          {% endfor %}
+        {% else %}
+          <p>{{ finch.name }} has not tried any tasty snacks yet!</p>
+        {% endif %}
+
+        <h4>Snacks left to try:</h4>
+        {% if snacks.count %}
+          {% for snack in snacks.all %}
+            <p>{{ snack.name}}</p>
+            <form action="{% url 'connect_snack' finch.id snack.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit">Add</button>
+            </form>
+          {% endfor %}
+        {% else %}
+          <p>{{finch.name}} has tried all the tasty snacks we have!</p>
+        {% endif %}
       </div>
     </div>
+
+
+    
+    
+
     <div class="column">
       <!-- display the finch meals -->
 

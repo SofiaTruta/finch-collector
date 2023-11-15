@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block main %}
+<div class='container m-6'>
+    <div class='card p-6'>
+        <h1 class='title'>Add a snack:</h1>
+        <form action="{% url 'snack_create' %}" method="POST">
+            {% csrf_token %}
+            <table class='table '>
+                {{ form.as_table }}
+            </table>
+            <input type="submit" value="Save it!" class='button is-success'>
+        </form>
+    </div>
+</div>
+{% endblock %}

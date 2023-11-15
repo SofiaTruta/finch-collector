@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="content m-6">
+  <h1>Snack List</h1>
+</div>
+
+
+{% for snack in snack_list %}
+<div class="card my-3">
+  <div class="card-content">
+    <h3 class='subtitle'>{{ snack.name }}</h3>
+    <form action="{% url 'snack_delete' snack.id %}" method="POST">
+      {% csrf_token %}
+      <button type="submit" class="button is-warning is-small">delete</button>
+    </form>
+  </div>
+</div>
+</a>
+{% endfor %}
+
+<div class='my-6'>
+  <form action="{% url 'snack_create' %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" class='button is-primary'>Add a new snack!</button>
+  </form>
+</div>
+{% endblock %}

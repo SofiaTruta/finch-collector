@@ -10,11 +10,22 @@ MEALS = (
 )
 
 # Create your models here.
+class Snack(models.Model):
+    name = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        return reverse("snack_details", kwargs={"pk": self.id})
+    
+
 class Finch(models.Model):
     name = models.CharField(max_length=100)
     species = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
     where_to_find = models.TextField(max_length=250)
+    snacks = models.ManyToManyField(Snack)
 
     def __str__(self):
         return self.name
@@ -24,7 +35,7 @@ class Finch(models.Model):
     
     def fed_for_today(self):
         return self.feeding_set.filter(date=date.today()).count() >= len(MEALS) #returns true if condition met
-
+    
 class Feeding(models.Model):
     date = models.DateField('feeding date')
     meal = models.CharField(

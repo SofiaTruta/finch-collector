@@ -31,7 +31,7 @@ def add_feeding(request, finch_id):
         new_feeding = form.save(commit=False)
         new_feeding.finch_id = finch_id
         new_feeding.save()
-    return redirect('single_finch')
+    return redirect('single_finch', finch_id=finch_id)
     
 
 class FinchCreate(CreateView):

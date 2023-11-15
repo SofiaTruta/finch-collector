@@ -48,11 +48,27 @@
       <!-- give option to add meal -->
       <div class='card p-6'>
         <p class="title is-4">Add a Meal:</p>
-        <form action="{% url 'add_feeding' finch.id %}">
+        <form action="{% url 'add_feeding' finch.id %}" method="POST">
           {% csrf_token %}
           {{ feeding_form.as_p }}
-          <input type="submit" value="Add Feeding" class='button is-primary is-light is-small'/>
+          {% if finch.fed_for_today %}
+          <fieldset disabled>
+            <input type="submit" value="No more food for today" class='button is-danger is-light is-small disabled' />
+          </fieldset>
+          {% else %}
+          <input type="submit" value="Add Feeding" class='button is-primary is-light is-small' />
+          {% endif %}
         </form>
+        <br>
+        {% if finch.fed_for_today %}
+        <div>
+          <p>{{ finch.name }} has been fed all meals for today. </p>
+        </div>
+        {% else %}
+        <div>
+          <p>{{ finch.name }} might be hungry</p>
+        </div>
+        {% endif %}
       </div>
 
     </div>
